@@ -1,14 +1,15 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace YouTubeVideoPlayer
 {
-    public class YouTubeVideoPlayer : ContentControl
+    public class YouTubeVideoPlayer : ContentControl, IDisposable
     {
         private static string _html;
-        private PerformanceWebBrowser _pwb = new PerformanceWebBrowser();
+        private readonly PerformanceWebBrowser _pwb = new PerformanceWebBrowser();
 
         #region DependencyProperty
         public string VideoId
@@ -51,6 +52,11 @@ namespace YouTubeVideoPlayer
                 }
             }
             return _html;
+        }
+
+        public void Dispose()
+        {
+            _pwb.Dispose();
         }
     }
 }

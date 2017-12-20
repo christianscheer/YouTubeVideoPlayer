@@ -1,11 +1,12 @@
 ﻿using Microsoft.Win32;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Controls;
 
 namespace YouTubeVideoPlayer
 {
-    public class PerformanceWebBrowser : ContentControl
+    public class PerformanceWebBrowser : ContentControl, IDisposable
     {
         private readonly WebBrowser _wb = new WebBrowser();
 
@@ -25,6 +26,11 @@ namespace YouTubeVideoPlayer
         public PerformanceWebBrowser()
         {
             Content = _wb;
+        }
+
+        public void Dispose()
+        {
+            _wb.Dispose();
         }
 
         public void NavigateToString(string text)
